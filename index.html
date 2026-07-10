@@ -1133,6 +1133,82 @@
     cursor: pointer;
   }
 
+
+ /* Add this after your existing CSS, around line 1050 */
+
+/* ===== MOBILE PORTFOLIO FIX ===== */
+@media (max-width: 1024px) {
+  /* Show images at full brightness on mobile */
+  .portfolio-item img {
+    filter: brightness(0.95) contrast(1.05);
+  }
+  
+  /* Show overlays by default on mobile */
+  .portfolio-item-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 50%, transparent 100%);
+  }
+  
+  /* Always show the icon on mobile */
+  .portfolio-item-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Fix portfolio item heights on small screens */
+  .portfolio-item {
+    aspect-ratio: 4/5;
+  }
+  
+  .portfolio-item.tall {
+    grid-row: span 1;
+    aspect-ratio: 4/5;
+  }
+  
+  .portfolio-item.wide {
+    grid-column: span 1;
+    aspect-ratio: 4/5;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .portfolio-item {
+    aspect-ratio: 3/4;
+  }
+  
+  .portfolio-item-overlay {
+    padding: 16px;
+  }
+  
+  .portfolio-item-title {
+    font-size: 16px;
+  }
+  
+  .portfolio-tag {
+    font-size: 8px;
+    padding: 2px 8px;
+  }
+}
+
+/* Disable cursor glow on touch devices */
+@media (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* Add support for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+ 
+ 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
     .nav { padding: 0 30px; }
@@ -1923,6 +1999,29 @@
 
   const portfolioGrid = document.querySelector('.portfolio-grid');
   if (portfolioGrid) portfolioObserver.observe(portfolioGrid);
+
+// Fix for mobile: toggle overlay on tap
+if ('ontouchstart' in window) {
+  portfolioItems.forEach(item => {
+    item.addEventListener('touchstart', function(e) {
+      this.classList.toggle('active');
+    });
+  });
+}
+
+// Pause hero slider animations when not visible
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    slides.forEach(slide => {
+      slide.querySelector('img').style.animationPlayState = 'paused';
+    });
+  } else {
+    slides.forEach(slide => {
+      slide.querySelector('img').style.animationPlayState = 'running';
+    });
+  }
+});
+ 
 </script>
 </body>
 </html>
