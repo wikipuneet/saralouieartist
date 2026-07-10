@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara Louie | Fine Line & Botanical Tattoo Artist — UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #c41e1e;
+    --red-dark: #9a1818;
+    --red-light: #e63946;
+    --red-glow: rgba(196, 30, 30, 0.15);
+    --bg: #0a0a0a;
+    --bg-card: #111111;
+    --text: #f5f0eb;
+    --text-muted: #9a9590;
+    --text-dim: #5a5550;
+    --border: #2a2520;
+    --border-light: #3a3530;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 60px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(196, 30, 30, 0.08);
+    transition: all 0.4s ease;
+  }
+
+  .nav.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .nav-logo-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--red);
+    letter-spacing: 2px;
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--red);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .nav-book:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(196, 30, 30, 0.4);
+  }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
+
+  .nav-hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s ease;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-slider {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  .hero-slide.active { opacity: 1; }
+
+  .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.35) contrast(1.1);
+    transform: scale(1.05);
+    animation: heroZoom 15s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroZoom {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.12); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.85) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-badge::before { content: '✦'; font-size: 10px; }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 8vw, 120px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--red);
+    font-weight: 300;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .btn-primary:hover::before { transform: translateX(100%); }
+  .btn-primary:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(196, 30, 30, 0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: transparent;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--red);
+    color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .hero-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.3s forwards;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero-scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 1px solid var(--text-muted);
+    border-bottom: 1px solid var(--text-muted);
+    transform: rotate(45deg);
+    animation: scrollBounce 2s ease infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(6px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee {
+    background: var(--red);
+    padding: 14px 0;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee 25s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .marquee-item::before { content: '✦'; font-size: 8px; opacity: 0.7; }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== SECTION COMMON ===== */
+  .section {
+    padding: 120px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-title em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--red);
+    font-weight: 300;
+  }
+
+  /* ===== PORTFOLIO / HERO GALLERY ===== */
+  .portfolio {
+    background: var(--bg);
+    padding-bottom: 100px;
+  }
+
+  .portfolio-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .portfolio-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-top: 10px;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+
+  .portfolio-item.tall {
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+
+  .portfolio-item.wide {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: brightness(0.85) contrast(1.05);
+  }
+
+  .portfolio-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.1);
+  }
+
+  .portfolio-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.2) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+
+  .portfolio-item-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .portfolio-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 3px 10px;
+    background: rgba(196, 30, 30, 0.1);
+  }
+
+  .portfolio-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .portfolio-item-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease;
+    color: var(--text);
+  }
+
+  .portfolio-item:hover .portfolio-item-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .portfolio-cta {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 50px;
+    border-top: 1px solid var(--border);
+  }
+
+  .portfolio-cta-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+
+  .portfolio-cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-instagram::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .btn-instagram:hover::before { transform: translateX(100%); }
+  .btn-instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(131, 58, 180, 0.4);
+  }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .lightbox.open { opacity: 1; pointer-events: all; }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 2001;
+    transition: transform 0.3s ease;
+  }
+
+  .lightbox-close:hover { transform: rotate(90deg); }
+
+  .lightbox-img {
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    transform: scale(0.9);
+    transition: transform 0.4s ease;
+  }
+
+  .lightbox.open .lightbox-img { transform: scale(1); }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .lightbox-nav:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  /* ===== ABOUT ===== */
+  .about { background: var(--bg); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text);
+    border-left: 2px solid var(--red);
+    padding-left: 24px;
+    margin: 32px 0;
+    line-height: 1.6;
+  }
+
+  .about-image-wrap { position: relative; }
+
+  .about-image-wrap::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid var(--red);
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  .about-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.05);
+  }
+
+  .about-signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--red);
+    margin-top: 24px;
+  }
+
+  /* ===== PROCESS ===== */
+  .process { background: var(--bg); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .process-step {
+    text-align: center;
+    position: relative;
+  }
+
+  .process-step::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    right: -20px;
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .process-step:last-child::after { display: none; }
+
+  .process-step-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--red);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .process-step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .process-step-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-section {
+    background: #111;
+    padding: 120px 60px;
+  }
+
+  .testimonials-inner { max-width: 1400px; margin: 0 auto; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .testimonial-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 36px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--red);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(196, 30, 30, 0.1);
+  }
+
+  .testimonial-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--red);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    color: var(--red);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .testimonial-detail {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact { background: var(--bg); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+  }
+
+  .contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-top: 40px;
+  }
+
+  .contact-info-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contact-info-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    color: var(--red);
+    font-size: 18px;
+  }
+
+  .contact-info-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .contact-info-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .contact-info-value a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .contact-info-value a:hover { color: var(--red); }
+
+  .contact-form-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 48px;
+  }
+
+  .contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--red);
+    background: rgba(196, 30, 30, 0.05);
+  }
+
+  .form-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9590' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  .form-select option { background: var(--bg); color: var(--text); }
+  .form-textarea { min-height: 120px; resize: vertical; }
+
+  .form-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .form-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .form-submit:hover::before { transform: translateX(100%); }
+  .form-submit:hover {
+    background: var(--red-dark);
+    box-shadow: 0 8px 30px rgba(196, 30, 30, 0.4);
+  }
+
+  .form-note {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: #050505;
+    border-top: 1px solid var(--border);
+    padding: 60px;
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-social {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== MOBILE NAV ===== */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.98);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu a:hover { color: var(--red); }
+
+  .mobile-close {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .nav { padding: 0 30px; }
+    .section { padding: 80px 30px; }
+    .hero-content { padding: 0 30px; }
+    .about-grid { grid-template-columns: 1fr; gap: 50px; }
+    .about-image { height: 450px; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .process-step::after { display: none; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+    .testimonials-section { padding: 80px 30px; }
+    .footer { padding: 40px 30px; }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-item.wide { grid-column: span 2; }
+    .portfolio-item.tall { grid-row: span 1; aspect-ratio: 3/4; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-book { display: none; }
+    .nav-hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+
+    .nav-logo-name { font-size: 20px; }
+
+    .hero-title { font-size: clamp(40px, 12vw, 72px); }
+    .hero-tagline { font-size: 18px; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+
+    .process-steps { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 28px; }
+
+    .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-item.wide { grid-column: span 1; aspect-ratio: 3/4; }
+    .portfolio-item.tall { grid-row: span 1; aspect-ratio: 3/4; }
+    .portfolio-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ===== CURSOR GLOW ===== */
+  .cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,30,30,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="Logo_sara.png" width="100" height="100">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-book">Book Now</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#process" onclick="closeMobile()">Process</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Book Now</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-slider">
+    <div class="hero-slide active">
+      <img src="hero.jpg" alt="Botanical tattoo portfolio piece">
+    </div>
+    <div class="hero-slide">
+      <img src="https://image.qwenlm.ai/public_source/2af8e056-47dd-412f-8e44-3c4441557763/1c2d3e4f5-6a7b-8c9d-0e1f-2a3b4c5d6e7f.png" alt="Fine line tattoo art">
+    </div>
+    <div class="hero-slide">
+      <img src="https://image.qwenlm.ai/public_source/2af8e056-47dd-412f-8e44-3c4441557763/1551fca3e-0d5e-49ed-bcc3-b5b175aa4041.png" alt="Realism tattoo artwork">
+    </div>
+    <div class="hero-slide">
+      <img src="https://image.qwenlm.ai/public_source/2af8e056-47dd-412f-8e44-3c4441557763/1606cfe25-4372-4837-8c73-d550e8cc06d3.png" alt="Geometric mandala tattoo">
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Fine Line & Botanical Tattoo Artist — UK</div>
+    <h1 class="hero-title">Sara<br><em>Louie</em></h1>
+    <p class="hero-tagline">Where art lives on skin — delicate, intentional, forever.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Consultation</a>
+      <a href="#portfolio" class="btn-secondary">View Portfolio</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-value">500+</div>
+        <div class="hero-stat-label">Tattoos Created</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">8+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">5.0</div>
+        <div class="hero-stat-label">Client Rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Fine Line</span>
+    <span class="marquee-item">Botanical</span>
+    <span class="marquee-item">Floral</span>
+    <span class="marquee-item">Minimalist</span>
+    <span class="marquee-item">Delicate</span>
+    <span class="marquee-item">UK Based</span>
+    <span class="marquee-item">Fine Line</span>
+    <span class="marquee-item">Botanical</span>
+    <span class="marquee-item">Floral</span>
+    <span class="marquee-item">Minimalist</span>
+    <span class="marquee-item">Delicate</span>
+    <span class="marquee-item">UK Based</span>
+    <span class="marquee-item">Fine Line</span>
+    <span class="marquee-item">Botanical</span>
+    <span class="marquee-item">Floral</span>
+    <span class="marquee-item">Minimalist</span>
+    <span class="marquee-item">Delicate</span>
+    <span class="marquee-item">UK Based</span>
+  </div>
+</div>
+
+<!-- Portfolio -->
+<section class="section portfolio" id="portfolio">
+  <div class="portfolio-header reveal">
+    <div>
+      <div class="section-label">Selected Works</div>
+      <h2 class="section-title">The <em>Portfolio</em></h2>
+      <p class="portfolio-subtitle">Each piece is a collaboration between vision and craft. Explore a curated selection of recent work across fine line, botanical, and minimalist styles.</p>
+    </div>
+  </div>
+
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item tall" data-index="0">
+      <img src="saralouie (1).jpg" alt="Mandala Lotus Forearm Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Fine Line</span>
+          <span class="portfolio-tag">Geometric</span>
+        </div>
+        <div class="portfolio-item-title">Mandala Lotus</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="1">
+      <img src="saralouie (2).jpg" alt="Name Script with Flower Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Fine Line</span>
+          <span class="portfolio-tag">Script</span>
+        </div>
+        <div class="portfolio-item-title">Script & Bloom</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="2">
+      <img src="saralouie (4).jpg" alt="Rose and Tribal Leg Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Botanical</span>
+          <span class="portfolio-tag">Traditional</span>
+        </div>
+        <div class="portfolio-item-title">Rose & Tribal</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item wide" data-index="3">
+      <img src="saralouie (5).jpg" alt="Realism Eye Compass Family Sleeve Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Realism</span>
+          <span class="portfolio-tag">Sleeve</span>
+        </div>
+        <div class="portfolio-item-title">The Journey Sleeve</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="4">
+      <img src="saralouie (6).jpg" alt="Trust No One Hand Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Lettering</span>
+        </div>
+        <div class="portfolio-item-title">Trust No One</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item tall" data-index="5">
+      <img src="saralouie (7).jpg" alt="Geometric Mandala Shoulder Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Geometric</span>
+          <span class="portfolio-tag">Mandala</span>
+        </div>
+        <div class="portfolio-item-title">Sacred Mandala</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="6">
+      <img src="saralouie (8).jpg" alt="Fine Line Bird Wrist Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Fine Line</span>
+          <span class="portfolio-tag">Minimal</span>
+        </div>
+        <div class="portfolio-item-title">Sparrow</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="7">
+      <img src="saralouie (9).jpg" alt="Tribal Blackwork Calf Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Tribal</span>
+        </div>
+        <div class="portfolio-item-title">Tribal Flow</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item wide" data-index="8">
+      <img src="saralouie (10).jpg" alt="Realistic Lion Shoulder Portrait Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Realism</span>
+          <span class="portfolio-tag">Portrait</span>
+        </div>
+        <div class="portfolio-item-title">The King</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="9">
+      <img src="saralouie (11).jpg" alt="Traditional Dagger and Roses Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Traditional</span>
+          <span class="portfolio-tag">Botanical</span>
+        </div>
+        <div class="portfolio-item-title">Dagger & Roses</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="10">
+      <img src="saralouie (12).jpg" alt="Custom Blackwork Shoulder Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Custom</span>
+        </div>
+        <div class="portfolio-item-title">Fluid Motion</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="11">
+      <img src="saralouie (13).jpg" alt="Geometric Sleeve Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Geometric</span>
+          <span class="portfolio-tag">Sleeve</span>
+        </div>
+        <div class="portfolio-item-title">Golden Ratio</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <!-- NEW IMAGES ADDED HERE -->
+    <div class="portfolio-item tall" data-index="12">
+      <img src="saralouie (14).jpg" alt="Tarot Card The Lovers Rib Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Fine Line</span>
+          <span class="portfolio-tag">Illustrative</span>
+        </div>
+        <div class="portfolio-item-title">The Lovers Tarot</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="13">
+      <img src="saralouie (15).jpg" alt="Barbed Wire and Spiked Ball Arm Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Edgy</span>
+        </div>
+        <div class="portfolio-item-title">Bound & Broken</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item wide" data-index="14">
+      <img src="saralouie (16).jpg" alt="Mythological Back Piece Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Mythology</span>
+        </div>
+        <div class="portfolio-item-title">The Guardian</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="15">
+      <img src="saralouie (17).jpg" alt="Ornate Peacock Forearm Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Fine Line</span>
+          <span class="portfolio-tag">Ornamental</span>
+        </div>
+        <div class="portfolio-item-title">Feathered Grace</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-index="16">
+      <img src="saralouie (18).jpg" alt="Chained Flail Thigh Tattoo" loading="lazy">
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-item-tags">
+          <span class="portfolio-tag">Blackwork</span>
+          <span class="portfolio-tag">Weaponry</span>
+        </div>
+        <div class="portfolio-item-title">Morning Star</div>
+      </div>
+      <div class="portfolio-item-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-cta reveal">
+    <p class="portfolio-cta-text">Every design begins with a conversation. Let's create something uniquely yours.</p>
+    <div class="portfolio-cta-actions">
+      <a href="https://instagram.com/saralouietattoo" target="_blank" rel="noopener" class="btn-instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        Follow @saralouietattoo
+      </a>
+      <a href="#contact" class="btn-primary">Book Your Design</a>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose"></button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<!-- About -->
+<section class="section about" id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">The Artist</div>
+      <h2 class="section-title">About <em>Sara</em></h2>
+      <p>Sara Louie is a UK-based fine line and botanical tattoo artist with over eight years of experience transforming ideas into permanent art. Based in her private studio, she specialises in delicate linework, intricate florals, and minimalist designs that honour the natural beauty of the human form.</p>
+      <p>Her approach is deeply collaborative — every session begins with listening. Sara believes that a tattoo should feel like an extension of who you are, not just something placed upon you. Her meticulous attention to detail and gentle technique have earned her a devoted following across the UK.</p>
+      <blockquote class="about-quote">"I don't just draw on skin — I listen to stories, then translate them into something that will live with you forever."</blockquote>
+      <p>When she's not tattooing, Sara can be found sketching botanical studies, exploring vintage tattoo archives, or wandering through London's flower markets for inspiration.</p>
+      <div class="about-signature">— Sara Louie</div>
+    </div>
+    <div class="about-image-wrap reveal">
+      <img src="artist.jpg" alt="Sara Louie at work" class="about-image">
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section process" id="process">
+  <div class="reveal">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">The <em>Process</em></h2>
+  </div>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="process-step-number">01</div>
+      <h3 class="process-step-title">Consultation</h3>
+      <p class="process-step-desc">We discuss your vision, placement, size, and style. Bring reference images and let's explore ideas together — no pressure, just creativity.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-number">02</div>
+      <h3 class="process-step-title">Design</h3>
+      <p class="process-step-desc">Sara creates a custom design tailored to your body and story. You'll receive a digital preview to review and refine before your session.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-number">03</div>
+      <h3 class="process-step-title">Tattoo Session</h3>
+      <p class="process-step-desc">Relax in a calm, private studio environment. Sara works with precision and care, ensuring every line is placed with intention.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-number">04</div>
+      <h3 class="process-step-title">Aftercare</h3>
+      <p class="process-step-desc">You'll receive detailed aftercare instructions and ongoing support. Sara checks in to ensure your tattoo heals beautifully.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section" id="testimonials">
+  <div class="testimonials-inner">
+    <div class="reveal">
+      <div class="section-label">Client Words</div>
+      <h2 class="section-title">What They <em>Say</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">Sara completely understood my vision. The fine line floral on my forearm is absolutely stunning — delicate yet bold. She made me feel so comfortable throughout.</p>
+        <div class="testimonial-author">Emma Richardson</div>
+        <div class="testimonial-detail">London · Botanical Sleeve</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">I've been to many artists but Sara's attention to detail is unmatched. My minimalist wrist tattoo healed perfectly and looks even better than the design mockup.</p>
+        <div class="testimonial-author">Sophie Chen</div>
+        <div class="testimonial-detail">Manchester · Fine Line Wrist</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">From consultation to aftercare, Sara was incredible. She took time to understand what my tattoo meant to me. The result brought tears to my eyes — in the best way.</p>
+        <div class="testimonial-author">James Whitfield</div>
+        <div class="testimonial-detail">Birmingham · Memorial Piece</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">Third tattoo with Sara and already planning the fourth. Her studio is beautiful, her technique is flawless, and she genuinely cares about every single piece she creates.</p>
+        <div class="testimonial-author">Olivia Marsh</div>
+        <div class="testimonial-detail">Leeds · Geometric Back</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Book Your<br><em>Session</em></h2>
+      <div class="contact-info-list">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value"><a href="mailto:hello@saralouie.co.uk">hello@saralouie.co.uk</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Studio</div>
+            <div class="contact-info-value">Private Studio<br>Shoreditch, London<br>EC2A 3NE</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Availability</div>
+            <div class="contact-info-value">Tue – Sat, by appointment<br><span style="color:var(--text-muted);font-weight:400;font-size:14px;">Walk-ins welcome on Fridays</span></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Instagram</div>
+            <div class="contact-info-value"><a href="https://instagram.com/saralouietattoo" target="_blank" rel="noopener">@saralouietattoo ↗</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3 class="contact-form-title">Send a Message</h3>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Style Interested In</label>
+          <select name="style" class="form-select" required>
+            <option value="" disabled selected>Select a style</option>
+            <option>Fine Line</option>
+            <option>Botanical / Floral</option>
+            <option>Minimalist</option>
+            <option>Geometric</option>
+            <option>Blackwork</option>
+            <option>Custom Design</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Us Your Idea</label>
+          <textarea name="message" class="form-textarea" placeholder="Describe your tattoo idea, placement, size, any references..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <p class="form-note">Sara typically responds within 48 hours</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <img src="Logo_sara.png" width="100" height="100">
+      <div class="footer-text">© 2024 Sara Louie Tattoo. All rights reserved.</div>
+    </div>
+    <div class="footer-socials">
+      <a href="https://instagram.com/saralouietattoo" target="_blank" rel="noopener" class="footer-social" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="mailto:hello@saralouie.co.uk" class="footer-social" aria-label="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // Cursor glow
+  const glow = document.getElementById('cursorGlow');
+  let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.1;
+    glowY += (mouseY - glowY) * 0.1;
+    glow.style.left = glowX + 'px';
+    glow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+
+  // Hero slider
+  const slides = document.querySelectorAll('.hero-slide');
+  let currentSlide = 0;
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+
+  setInterval(nextSlide, 5000);
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#2a8a2a';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      e.target.reset();
+    }, 2500);
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  let currentIndex = 0;
+
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const portfolioImages = Array.from(portfolioItems).map(item => ({
+    src: item.querySelector('img').src,
+    alt: item.querySelector('img').alt
+  }));
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    lightboxImg.src = portfolioImages[currentIndex].src;
+    lightboxImg.alt = portfolioImages[currentIndex].alt;
+    lightboxCounter.textContent = `${currentIndex + 1} / ${portfolioImages.length}`;
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % portfolioImages.length;
+    updateLightbox();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + portfolioImages.length) % portfolioImages.length;
+    updateLightbox();
+  }
+
+  portfolioItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const index = parseInt(item.dataset.index);
+      openLightbox(index);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+  lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  // Staggered reveal for portfolio items
+  const portfolioObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const items = entry.target.querySelectorAll('.portfolio-item');
+        items.forEach((item, i) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(30px)';
+          item.style.transition = `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.08}s`;
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, 50);
+        });
+        portfolioObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const portfolioGrid = document.querySelector('.portfolio-grid');
+  if (portfolioGrid) portfolioObserver.observe(portfolioGrid);
+</script>
+</body>
+</html>
